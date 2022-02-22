@@ -1,30 +1,26 @@
 <!DOCTYPE html>
 <html>
 <body>
-<button onclick = 'greg()'> press me to see example </button>
-<img id = "go" data-srcset="https://www.overlookhorizon.com/wp-content/uploads/2017/01/logo_1-1-e1485538109325.png 1x" width="192" height="192" alt="OLHZN High Altitude Balloons | Canandaigua, NY Logo" data-retina_logo_url="" data-src="https://www.overlookhorizon.com/wp-content/uploads/2017/01/logo_1-1-e1485538109325.png" class="fusion-standard-logo lazyloaded" src="https://www.overlookhorizon.com/wp-content/uploads/2017/01/logo_1-1-e1485538109325.png" srcset="https://www.overlookhorizon.com/wp-content/uploads/2017/01/logo_1-1-e1485538109325.png 1x">
-<p id="demo">High altitude balloons (weather balloons) can be an incredibly fun and rewarding experience. It’s a great home project for students and adults, but there are some best practices and important <a href="http://www.overlookhorizon.com/flight-safety/"><strong>safety regulations</strong></a> that you must follow if you’re going to operate your own flight. The information and guidelines below outside the processes and systems we implement to launch our high altitude weather balloons in the United States. Our flights are regulated by the US Federal Aviation Administration (FAA) so we follow their <a href="http://www.overlookhorizon.com/flight-safety/"><strong>safety and regulation</strong></a> procedures. It’s important to note that each country has their own restrictions so if you’re outside of the US, be sure to check with your government’s aviation authority for regulations in your country.&nbsp; Here’s some topics to get you started:</p>
-<ul id = "links">
-<li><a href="http://www.overlookhorizon.com/how-to-launch-weather-balloons/balloon-info/"><strong>Atmospheric Weather Balloons</strong></a></li>
-<li><a href="http://www.overlookhorizon.com/how-to-launch-weather-balloons/lifting-gas/"><strong>Lifting Gas</strong></a></li>
-<li><a href="http://www.overlookhorizon.com/how-to-launch-weather-balloons/inflate-weather-balloon/"><strong>How to Inflate a Weather Balloon</strong></a></li>
-<li><a href="http://www.overlookhorizon.com/how-to-launch-weather-balloons/parachutes/"><strong>Parachutes</strong></a></li>
-<li><a href="http://www.overlookhorizon.com/how-to-launch-weather-balloons/radar-reflectors/"><strong>Radar Reflectors</strong></a></li>
-<li><a href="http://www.overlookhorizon.com/how-to-launch-weather-balloons/tracking-systems/"><strong>Payload Tracking Systems</strong></a></li>
-<li><a href="http://www.overlookhorizon.com/how-to-launch-weather-balloons/cameras/"><strong>Camera Information</strong></a></li>
-<li><a href="http://www.overlookhorizon.com/how-to-launch-weather-balloons/flight-predictions/"><strong>Pre-Flight Predictions</strong></a></li>
-<li><a href="http://www.overlookhorizon.com/flight-safety/"><strong>US Flight Safety &amp; Regulations</strong></a></li>
-<li><a href="https://www.overlookhorizon.com/how-to-launch-weather-balloons/top-5-questions-for-a-weather-balloon-engineer/"><strong>Top 5 Questions</strong></a></li>
-</ul>
-<img src = "https://i.pinimg.com/originals/71/7f/9b/717f9bb5fb24c3378a6fe47f2e25f690.jpg" id = "hello">
+<h1> Billys Gym journey </h1>
+<p>started going gym and thought id start a gym blog</p>
+<button onclick = "greg()" style = "font-size:25px"> progress checker</button>
+<br>
+<p id="day"> day1 </p>
+<br>
+<img id="im" src = 'https://st2.depositphotos.com/1726139/6224/i/950/depositphotos_62245465-stock-photo-skinny-man-training-his-bicep.jpg'>
 <script>
-function greg(){
-	document.getElementById("hello").src = "https://cdn.images.express.co.uk/img/dynamic/25/590x/secondary/Google-Maps-Street-View-la-roche-posay-france-1483938.jpg?r=1535559471514";
-	document.getElementById("demo").innerHTML = "optimal landing postion";
-	document.getElementById("go").remove();
-	document.getElementById("links").remove();
+var count = 0;
+function greg() {
+	if(count==0){
+		count = 1;
+		document.getElementById("day").innerHTML = 'day 2';
+		document.getElementById("im").src = 'https://img.mensxp.com/media/content/2018/May/freakishly-huge-bodybuilders-who-hardly-ever-compete1-1525426511.jpg?w=500&h=500';
+	} else {
+		count = 0;
+		document.getElementById("day").innerHTML = 'day 1';
+		document.getElementById("im").src = 'https://st2.depositphotos.com/1726139/6224/i/950/depositphotos_62245465-stock-photo-skinny-man-training-his-bicep.jpg';
+	}
 }
 </script>
-</form>
 </body>
 </html>
