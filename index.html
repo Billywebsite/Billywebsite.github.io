@@ -1,28 +1,10 @@
 <!DOCTYPE html>
 <html>
 <body>
-<h1 style='background-color:yellow; font-size:70px; max-width:800px'> Welcome to Billy Website</h1>
+<h1 style='background-color:yellow; font-size:70px; width:800px'> Welcome to Billy Website</h1>
 <h1 style='background-color:lightblue; width:200px' onclick = window.open('gym.html')> gym journey</h1>
 <h1 style='background-color:pink; width:200px' onclick = window.open('news.html')> news site</h1>
 <h1 style='background-color:lightgreen; width:200px' onclick = window.open('blog.html')> personal blog</h1>
+<h1 style = 'background-color:grey; width:200px; font-color:white' onclick = window.open('eiffel-tower.html')>history</h1>
 <img src = 'https://images2.minutemediacdn.com/image/upload/c_fit,f_auto,fl_lossy,q_auto,w_728/v1555999902/shape/mentalfloss/construction_8.gif?itok=i0AHeyO3'>
-<p onclick = 'wow()' id = 'counter' style = 'font-size:75px; background:red; width:150px; color:white'> click </p>
-
-</body>
-<script>
-var count = 0;
-localStorage.setItem('clicks', parseInt(0));
-function wow(){
-	localStorage.setItem('clicks', parseInt(localStorage.getItem('clicks'))+parseInt(1));
-	document.getElementById('counter').innerHTML = localStorage.getItem('clicks');
-	count = 0
-	while(count<500){
-		var para = document.createElement("img");
-		para.src = 'https://images2.minutemediacdn.com/image/upload/c_fit,f_auto,fl_lossy,q_auto,w_728/v1555999902/shape/mentalfloss/construction_8.gif?itok=i0AHeyO3';
-		document.body.appendChild(para);
-		count = count+1;
-	}
-}
-</script>
-
 </html>
