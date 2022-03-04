@@ -1,4 +1,4 @@
-body {background-color:lightgrey; font-family:arial; position:relative; left:200;}
+body {background-color:lightgrey; font-family:arial; text-align:center;}
 h1{font-size:40;}
-h3{color:white}
-img{position:relative; left:100px}
+h3{color:white;}
+img{position:absolute; left:100px; position:absolute;}

@@ -1,4 +1,4 @@
-<html>
+<html onmousemove = 'logMovement(event)'>
 <head>
 
 	<title>La Tour Eiffel</title>
@@ -13,25 +13,23 @@
 
 </body>
 <script>
-var l = 0
-var w = 0
-function logMovement(event) {
-  l += event.movementX
-  w += event.movementY
-  log.style.left =l;
-  log.style.top = w
-}
-
+var l = 0;
+var w = 0;
 const log = document.getElementById('tower');
-document.addEventListener('mousemove', logMovement);
-var count = 0
+function logMovement(event) {
+  l = event.clientX;
+  w = event.clientY;
+  log.style.left = l-100;
+  log.style.top = w-100;
+}
+var count = 0;
 function build(){
 	if(count == 0){
-		document.getElementById('tower').src = 'complete.jpg'
-		count += 1
+		document.getElementById('tower').src = 'complete.jpg';
+		count += 1;
 	}else{
-		document.getElementById('tower').src = 'tour_eiffel.jpg'
-		count -=1
+		document.getElementById('tower').src = 'tour_eiffel.jpg';
+		count -=1;
 	}
 }
 
