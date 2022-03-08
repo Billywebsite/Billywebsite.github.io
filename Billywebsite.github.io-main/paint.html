@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<body>
+<canvas id = 'canvas' width = 900px height = 400px style="border:1px solid #000000;" onmousemove = 'paint(event)'></canvas>
+<img id = 'im'>
+</body>
+<script>
+var count = 0;
+function paint(event){
+	var can = document.getElementById('canvas').getContext('2d');
+	if(count == 0){
+		var x = event.clientX;
+		var y = event.clientY;
+		count = 1;
+	}
+	can.moveTo(x, y);
+	x = event.clientX;
+	y = event.clientY;
+
+	can.lineTo(x, y);
+	can.stroke();
+	
+}
+
+</script>
+</html>

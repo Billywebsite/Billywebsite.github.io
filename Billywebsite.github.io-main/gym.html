@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<body>
+<h1> Billys Gym journey </h1>
+<p>started going gym and thought id start a gym blog</p>
+<button onclick = "greg()" style = "font-size:25px"> progress checker</button>
+<br>
+<p id="day"> day1 </p>
+<br>
+<img id="im" src = 'download.jpg'>
+<script>
+var count = 0;
+function greg() {
+	if(count==0){
+		count = 1;
+		document.getElementById("day").innerHTML = 'day 2';
+		document.getElementById("im").src = 'https://img.mensxp.com/media/content/2018/May/freakishly-huge-bodybuilders-who-hardly-ever-compete1-1525426511.jpg?w=500&h=500';
+	} else {
+		count = 0;
+		document.getElementById("day").innerHTML = 'day 1';
+		document.getElementById("im").src = 'download.jpg';
+	}
+}
+</script>
+</body>
+</html>
