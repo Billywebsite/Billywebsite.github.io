@@ -1,17 +1,46 @@
 <!DOCTYPE html>
 <html>
 <body>
-<div id = 'canvas' style = 'width:900px; height:400px; border-style:solid; border-width:3px' onmousemove = 'paint(event)'></div>
+<button onclick = "save()" style = 'font-size:50px; background-color:blue; color:white; border:none; position:absolute; left:400px; top:430px'>save</button>
+<br>
+<canvas id='canvas' width='900' height='400' style="border:1px solid #000000;" onmousemove='paint(event)' onclick = 'off()'>hewllo<canvas>
+
 </body>
 <script>
+var count = 0
 function paint(event){
-	var canvas = document.getElementById('canvas');
-	var point = document.createElement('img');
-	point.src = 'black.jpg';
-	point.style = 'width:10px; position:absolute';
-	point.style.left = event.clientX + 'px';
-	point.style.top = event.clientY + 'px';
-	document.body.appendChild(point);
+	if(on){
+		var can = document.getElementById('canvas')
+		var canvas = document.getElementById('canvas').getContext('2d');
+		var x = event.clientX;
+		var y = event.clientY-20;
+		if (count == 0){
+			canvas.moveTo(x, y);
+			count = 1;
+		}
+		console.log(count)
+		canvas.lineTo(x, y);
+		canvas.stroke();
+	}else{
+		count = 0
+		}
+}
+var on = true;
+function off(){
+	console.log(on)
+	if(on){
+		on = false;
+	}
+	else{
+		on = true;
+	}
+}
+function save(){
+	var saver = document.createElement('a');
+	saver.href = document.getElementById('canvas').toDataURL();
+	saver.download = 'image.png'
+	document.body.appendChild(saver)
+	saver.click();
 }
 </script>
 </html>
