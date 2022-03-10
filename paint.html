@@ -1,10 +1,29 @@
 <!DOCTYPE html>
 <html>
-<body>
-<button onclick = "save()" style = 'font-size:50px; background-color:blue; color:white; border:none; position:absolute; left:400px; top:430px'>save</button>
-<br>
-<canvas id='canvas' width='900' height='400' style="border:1px solid #000000;" onmousemove='paint(event)' onclick = 'off()'>hewllo<canvas>
+<head>
+<style>
+.color{height:50px; width:50px; border-style:solid; float:left;}
+#red{background-color:red;}
+#yellow{background-color:yellow;}
+#green{background-color:green;}
+#blue{background-color:blue;}
+#green{background-color:green;}
+#black{background-color:black;}
 
+
+</style>
+</head>
+<body>
+<button onclick = "save()" style = 'font-size:50px; background-color:blue; color:white; border-style:solid; position:absolute; left:400px; top:430px'>save</button>
+<br>
+<canvas id='canvas' width='900' height='400' style="border:1px solid #000000;" onmousemove='paint(event)' onclick = 'off()'>hewllo</canvas>
+<div id = 'colorgroup'>
+<div class = 'color' id = 'red' onclick = 'change(document.getElementById("red"))'></div>
+<div class = 'color' id = 'yellow' onclick = 'change(document.getElementById("yellow"))'></div>
+<div class = 'color' id = 'green' onclick = 'change(document.getElementById("green"))'></div>
+<div class = 'color' id = 'blue' onclick = 'change(document.getElementById("blue"))'></div>
+<div class = 'color' id = 'black' onclick = 'change(document.getElementById("black"))'></div>
+</div>
 </body>
 <script>
 var count = 0
@@ -41,6 +60,15 @@ function save(){
 	saver.download = 'image.png'
 	document.body.appendChild(saver)
 	saver.click();
+}
+function change(color){
+	var canim = document.createElement('img');
+	canim.src = document.getElementById('canvas').toDataURL();
+	canim.id = 'canim'
+	document.body.appendChild(canim)
+	document.getElementById('canvas').getContext('2d').drawImage(document.getElementById('canim'), 0, 0, 900, 400);
+	document.getElementById('canvas').getContext('2d').strokeStyle = color.id;
+	document.getElementById('canim').remove()
 }
 </script>
 </html>
