@@ -24,12 +24,13 @@
 <div class = 'color' id = 'blue' onclick = 'change(document.getElementById("blue"))'></div>
 <div class = 'color' id = 'black' onclick = 'change(document.getElementById("black"))'></div>
 </div>
+<img id = 'i' src = 'download.jpg'>
 </body>
 <script>
 var count = 0
 function paint(event){
 	if(on){
-		var can = document.getElementById('canvas')
+		var can = document.getElementById('canvas');
 		var canvas = document.getElementById('canvas').getContext('2d');
 		var x = event.clientX;
 		var y = event.clientY-20;
@@ -37,16 +38,15 @@ function paint(event){
 			canvas.moveTo(x, y);
 			count = 1;
 		}
-		console.log(count)
+		console.log(count);
 		canvas.lineTo(x, y);
 		canvas.stroke();
 	}else{
-		count = 0
+		count = 0;
 		}
 }
 var on = true;
 function off(){
-	console.log(on)
 	if(on){
 		on = false;
 	}
@@ -57,18 +57,22 @@ function off(){
 function save(){
 	var saver = document.createElement('a');
 	saver.href = document.getElementById('canvas').toDataURL();
-	saver.download = 'image.png'
-	document.body.appendChild(saver)
+	saver.download = 'image.png';
+	document.body.appendChild(saver);
 	saver.click();
 }
 function change(color){
-	var canim = document.createElement('img');
+	let can = document.getElementById('canvas').getContext('2d');
+	let canim = document.createElement('img');
+	canim.crossorigin = "Anonymous"
 	canim.src = document.getElementById('canvas').toDataURL();
-	canim.id = 'canim'
-	document.body.appendChild(canim)
-	document.getElementById('canvas').getContext('2d').drawImage(document.getElementById('canim'), 0, 0, 900, 400);
-	document.getElementById('canvas').getContext('2d').strokeStyle = color.id;
-	document.getElementById('canim').remove()
+	canim.id = 'canim';
+	document.body.appendChild(canim);
+	can.clearRect(0, 0, 900, 400);
+	can.drawImage(document.getElementById('canim'), 0, 0, 900, 400);
+	can.strokeStyle = color.id;
+	canim.remove();
+	console.log('hello billt')
 }
 </script>
 </html>
