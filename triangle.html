@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html>
+<body>
+<input type = 'range' min = 1 max = 2 id = 'slider' oninput = 'val()' class = 'slider'>
+<p id = 'test' ></p>
+</body>
+<script>
+function val(){
+	document.getElementById('test').innerHTML = document.getElementById('slider').value;
+	}
+</script>
+</html>
