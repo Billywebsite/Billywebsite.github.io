@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<body>
+<p id = '1'>type image url</p>
+<input type = 'text' id = 'input'>
+<button onclick = 'createim(document.getElementById("input"))'>submit</button>
+</body>
+<script>
+function createim(input){
+	var im = document.createElement('img');
+	//im.crossOrigin = "Anonymous";
+	im.src = input.value;
+	im.onload = function(){
+		var can = document.createElement('canvas')
+		can.width = (im.width);
+		can.height = (im.height);
+		document.body.appendChild(can);
+		can.getContext('2d').drawImage(im, 0, 0)
+		document.getElementById("1").innerHTML = can.getContext('2d').getImageData(0, 0, can.width, can.height)
+	}
+}
+
+</script>
+</html>
