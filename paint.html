@@ -14,23 +14,26 @@
 </style>
 </head>
 <body>
-<button onclick = "save()" style = 'font-size:50px; background-color:blue; color:white; border-style:solid; position:absolute; left:400px; top:430px'>save</button>
+<canvas id='canvas' width='1200' height='700' style="border:1px solid #000000;" onmousemove='paint(event, event.clientX, event.clientY-20)' onclick = 'off()'>hewllo</canvas>
 <br>
-<canvas id='canvas' width='900' height='400' style="border:1px solid #000000;" onmousemove='paint(event, event.clientX, event.clientY)' onclick = 'off()'>hewllo</canvas>
-<div id = 'colorgroup'>
-<div class = 'color' id = 'red' onclick = 'change(document.getElementById("red"))'></div>
-<div class = 'color' id = 'yellow' onclick = 'change(document.getElementById("yellow"))'></div>
-<div class = 'color' id = 'green' onclick = 'change(document.getElementById("green"))'></div>
-<div class = 'color' id = 'blue' onclick = 'change(document.getElementById("blue"))'></div>
-<div class = 'color' id = 'black' onclick = 'change(document.getElementById("black"))'></div>
-</div>
+<button onclick = "save()" style = 'font-size:50px; background-color:blue; color:white; border-style:solid;'>save</button>
 </body>
 <script>
-var count = 0
+var count = 0;
+var pos = [];
+for (x = 0; x<50; x++){
+	pos[x] = [0, 0];
+	}
 function paint(event, x, y){
+	const nx = [event.clientX, event.clientY-20]
+	pos[pos.length-1] = nx;
+	for (var i = 0; i<pos.length-1; i++){
+		pos[i] = pos[i+1];
+	}
 	if(on){
 		var can = document.getElementById('canvas')
 		var canvas = document.getElementById('canvas').getContext('2d');
+		canvas.fillStyle = 'red';
 		//var x = event.clientX;
 		//var y = event.clientY-20;
 		if (count == 0){
@@ -38,10 +41,14 @@ function paint(event, x, y){
 			count = 1;
 		}
 		count= count +1;
-		canvas.lineTo(x, y)
-		canvas.stroke()
+		canvas.moveTo(pos[pos.length-3][0], pos[pos.length-3][1]);
+		canvas.lineTo(x, y);
+		canvas.moveTo(pos[15][0], pos[15][1]);
+		canvas.lineTo(pos[0][0], pos[0][1]);
+		canvas.fillRect(pos[0][0], pos[0][1], pos[6][0]-pos[0][0], pos[6][1]-pos[0][1]);
+		canvas.stroke();
 	}else{
-		count = 0
+		count = 0;
 		}
 }
 var on = true;
