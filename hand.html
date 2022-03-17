@@ -3,16 +3,22 @@
 <body>
 <p id = '1'>type image url</p>
 <input type = 'text' id = 'input'>
-<button onclick = 'createim(document.getElementById("input"))'>submit</button>
-<button onclick = 'save()'>save</button>
+<input min = 0 max  = 255 type = 'range' oninput = 'createim(document.getElementById("input"), this.value)'>
+<button onclick = 'save'> save</button>
+<canvas id = 'canvas'></canvas>
+<br>
 </body>
 <script>
-function createim(input){
+
+function createim(input, value){
+	//if(document.getElementsByTagName("canvas").length != 0){
+		//document.getElementsByTagName("canvas")[0].remove();
+	//}
 	var im = document.createElement('img');
 	im.crossOrigin = "Anonymous";
 	im.src = input.value;
 	im.onload = function(){
-		var can = document.createElement('canvas');
+		var can = document.getElementById('canvas');
 		can.width = (im.width);
 		can.height = (im.height);
 		can.id = 'canvas';
@@ -26,7 +32,6 @@ function createim(input){
 		for (i = 0; i<imdata.length/4; i++){
 			pixels[i] = [];
 		}
-		//console.log(pixels);
 		for (i = 0; i<imdata.length; i++){
 			count = count+1;
 			if (count == 4){
@@ -40,8 +45,8 @@ function createim(input){
 			}
 		}
 		for (i=0; i<pixels.length; i++){
-			total = 0
-			count = 0
+			total = value
+			count = -1
 			for (var rgb=0; rgb<3; rgb++){
 				if (pixels[i][rgb]>total){
 					total = pixels[i][rgb];
@@ -49,9 +54,14 @@ function createim(input){
 				}
 				pixels[i][3] = 255;
 			}
-			pixels[i][count] = 255;
+			if (count != -1){
+				if((pixels[i][0] + pixels[i][1] + pixels[i][2])/3 < (45-value)){
+					pixels[i] = [0, 0, 0, 255];
+				} else{
+					pixels[i][count] = 255;
+				}
+			}
 		}
-		console.log(pixels.length);
 		for (i = 0;i<pixels.length;i++){
 			for(ii=0; ii<4; ii++){
 				pixels2[(i*4)+ii] = pixels[i][ii];
@@ -59,8 +69,6 @@ function createim(input){
 		}
 		pixels2 = new Uint8ClampedArray(pixels2);
 		imdat.data.set(pixels2);
-		console.log(pixels);
-		console.log(imdat.data);
 		can.getContext('2d').putImageData(imdat, 0, 0)
 		document.body.appendChild(can);
 	}
@@ -71,5 +79,6 @@ function save(){
 	save.download = 'image.png'
 	save.click();
 }
+
 </script>
 </html>
