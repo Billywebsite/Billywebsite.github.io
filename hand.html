@@ -43,7 +43,7 @@ function createim(input){
 			total = 0
 			count = 0
 			for (var rgb=0; rgb<3; rgb++){
-				if (rgb>total){
+				if (pixels[i][rgb]>total){
 					total = pixels[i][rgb];
 					count = rgb;
 				}
