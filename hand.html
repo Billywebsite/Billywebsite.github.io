@@ -1,12 +1,16 @@
 <!DOCTYPE html>
-<html>
+<html style = 'background-color:lightgrey;'>
 <body>
-<p id = '1'>type image url</p>
+<div style = 'border-style:solid; border-width:5px; padding:10px; width:250px'>
+<h2 id = '1'>type image url</p>
 <input type = 'text' id = 'input'>
-<input min = 0 max  = 255 type = 'range' oninput = 'createim(document.getElementById("input"), this.value)'>
-<button onclick = 'save'> save</button>
-<canvas id = 'canvas'></canvas>
 <br>
+<input min = 0 max  = 255 type = 'range' oninput = 'createim(document.getElementById("input"), this.value)'>
+<br>
+<h3 style = 'background-color:rgb(61, 61, 61); color:rgb(255, 255, 255); width:40px; padding:3px' onclick = 'save()'> save</button>
+</div>
+<br>
+<canvas id = 'canvas'></canvas>
 </body>
 <script>
 
@@ -57,6 +61,8 @@ function createim(input, value){
 			if (count != -1){
 				if((pixels[i][0] + pixels[i][1] + pixels[i][2])/3 < (45-value)){
 					pixels[i] = [0, 0, 0, 255];
+				} else if((pixels[i][0] + pixels[i][1] + pixels[i][2])/3 > (value + 175)){
+					pixels[i]= [255, 255, 255, 255];
 				} else{
 					pixels[i][count] = 255;
 				}
