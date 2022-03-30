@@ -1,20 +1,33 @@
 <!DOCTYPE html>
 <html onmousemove = 'move(event, document.getElementById("man"))'>
 <body>
-<img id = 'man' src = 'hand.png' style = 'position:absolute; top:800px; width:300px'>
-<img id = 'apple' src = 'apple.png' style = 'position:absolute; left:-300px; top:0px; width:300px'>
+<img id = 'man' src = 'hand.png' style = 'position:absolute; top:800px; width:100px'>
+<img id = 'apple' src = 'apple.png' style = 'position:absolute; left:0px; top:500px; width:100px; height:100px'>
 </body>
 <script>
 var x = 0;
 var y = 0;
 var arm = document.getElementById("arm")
+var apple = document.getElementById('apple')
+var hit = false;
+var xdirect = 10;
+var ydirect = 0;
+var count = 0;
 function move(event, hand){
 	x = event.clientX;
 	y = event.clientY;
-	hand.style.top = (y - 150) + 'px';
-	hand.style.left = (x-150) + 'px';
-	var apple = document.createElement('img')
+	hand.style.top = (y - (hand.height/2)) + 'px';
+	hand.style.left = (x-(hand.width/2)) + 'px';
+	apple.style.left = parseInt(apple.style.left) + xdirect + 'px';
+	apple.style.top = parseInt(apple.style.top) + ydirect + 'px';
+	if (hit == false && (x>parseInt(apple.style.left))&&(x<parseInt(apple.style.left)+apple.width)&&(y>parseInt(apple.style.top))&&(y<parseInt(apple.style.top)+apple.height)){
+		hit = true;
+		xdirect = (xdirect+event.movementX)/3;
+		ydirect = (ydirect+event.movementY)/3;
+		console.log(xdirect, ydirect)
+	}else{
+		hit = false;
+	}
 }
-
 </script>
 </html>
