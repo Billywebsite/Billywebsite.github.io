@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html onmousemove = 'move(event, document.getElementById("man"))'>
+<body>
+<img id = 'man' src = 'hand.png' style = 'position:absolute; top:800px; width:300px'>
+<img id = 'apple' src = 'apple.png' style = 'position:absolute; left:-300px; top:0px; width:300px'>
+</body>
+<script>
+var x = 0;
+var y = 0;
+var arm = document.getElementById("arm")
+function move(event, hand){
+	x = event.clientX;
+	y = event.clientY;
+	hand.style.top = (y - 150) + 'px';
+	hand.style.left = (x-150) + 'px';
+	var apple = document.createElement('img')
+}
+
+</script>
+</html>
