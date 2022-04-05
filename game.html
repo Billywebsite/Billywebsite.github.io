@@ -13,7 +13,7 @@
 <html style = 'background-color:lightgrey' id = 'hello' onmousemove = 'newel(event)'>
 <body>
 <h1>score:</h1><h1 id = 'score' >0</h1>
-<h1 id = 'time' style = 'font-size:50px; color:darkred; position:absolute; left:500px; top:0px'>10s</h1>
+<h1 id = 'time' style = 'font-size:50px; color:darkred; position:absolute; left:500px; top:0px'>30s</h1>
 <h1 style = 'position:absolute; left:900px; top:0px'>highscore:</h1><h1 id = 'hiscore' style = 'position:absolute; left:1050px; top:0px'>0</h1>
 <img id = 'man' src = 'hand.png' style = 'position:absolute; top:800px; width:100px'>
 <img id = 'apple' src = 'apple.png' style = 'position:absolute; left:0px; top:500px; width:100px; height:100px'>
@@ -93,7 +93,7 @@ function move(event){
 			document.getElementById('hiscore').innerHTML = document.getElementById('score').innerHTML
 		}
 		score.innerHTML = 0;
-		document.getElementById('time').innerHTML = '10s';
+		document.getElementById('time').innerHTML = '30s';
 	}
 }
 </script>
