@@ -1,8 +1,23 @@
+
+
+
+
+
+
+
+
+
+
+
 <!DOCTYPE html>
-<html onmousemove = 'move(event, document.getElementById("man"))'>
+<html style = 'background-color:lightgrey' id = 'hello' onmousemove = 'newel(event)'>
 <body>
+<h1>score:</h1><h1 id = 'score' >0</h1>
+<h1 id = 'time' style = 'font-size:50px; color:darkred; position:absolute; left:500px; top:0px'>10s</h1>
+<h1 style = 'position:absolute; left:900px; top:0px'>highscore:</h1><h1 id = 'hiscore' style = 'position:absolute; left:1050px; top:0px'>0</h1>
 <img id = 'man' src = 'hand.png' style = 'position:absolute; top:800px; width:100px'>
 <img id = 'apple' src = 'apple.png' style = 'position:absolute; left:0px; top:500px; width:100px; height:100px'>
+<div id = 'el'></div>
 </body>
 <script>
 var x = 0;
@@ -13,20 +28,72 @@ var hit = false;
 var xdirect = 10;
 var ydirect = 0;
 var count = 0;
-function move(event, hand){
-	x = event.clientX;
-	y = event.clientY;
+var score = document.getElementById('score');
+var hashit = false;
+var prex = 0;
+var prey = 0;
+function newel(event){
+	document.getElementById('el').remove();
+	var el = document.createElement('div');
+	el.style = 'position:absolute';
+	el.id = 'el';
+	el.style.left = event.clientX + 'px'
+	el.style.top = event.clientY + 'px'
+	el.addEventListener('click', move);
+	document.body.appendChild(el);
+}
+setInterval(function(){document.getElementById('el').click()}, 10)
+setInterval(function(){document.getElementById('time').innerHTML = parseInt(document.getElementById('time').innerHTML)-1 +'s'}, 1000)
+function move(event){
+	hand = document.getElementById('man');
+	x = parseInt(document.getElementById('el').style.left);
+	y = parseInt(document.getElementById('el').style.top);
 	hand.style.top = (y - (hand.height/2)) + 'px';
 	hand.style.left = (x-(hand.width/2)) + 'px';
 	apple.style.left = parseInt(apple.style.left) + xdirect + 'px';
 	apple.style.top = parseInt(apple.style.top) + ydirect + 'px';
 	if (hit == false && (x>parseInt(apple.style.left))&&(x<parseInt(apple.style.left)+apple.width)&&(y>parseInt(apple.style.top))&&(y<parseInt(apple.style.top)+apple.height)){
 		hit = true;
-		xdirect = (xdirect+event.movementX)/3;
-		ydirect = (ydirect+event.movementY)/3;
-		console.log(xdirect, ydirect)
+		var splat = document.createElement('img')
+		splat.src = 'splat.png'
+		splat.style = 'position:absolute; width:100px; opacity:0.5;'
+		splat.style.left = x+'px'
+		splat.style.top = y+'px'
+		document.body.appendChild(splat)
+		xdirect = xdirect + ((x-prex)/3)
+		ydirect = ydirect + ((y-prey)/3)
+		hashit = true
+
 	}else{
 		hit = false;
+	}
+	if (parseInt(apple.style.left)>2000 || parseInt(apple.style.top)>1000 ||parseInt(apple.style.left)<-100|| parseInt(apple.style.top)<-100){
+		if(hashit){
+			score.innerHTML = parseInt(score.innerHTML) +1;
+			hashit = false;
+		}
+		var ran = Math.random();
+		console.log(ran);
+		if (ran >= 0.5){
+			apple.style.left = (Math.random()*1700)+100+'px';
+			xdirect = Math.random() * 2;
+			ydirect = Math.random() * 2;
+			apple.style.top = (Math.random() * 500) + 'px';
+		}else if (ran < 0.5){
+			apple.style.left = (Math.random()*1700)+100+'px';
+			xdirect = Math.random() * -2;
+			ydirect = Math.random() * -2;
+			apple.style.top = (Math.random() * 500) + 'px';
+		}
+	}
+	prex = x;
+	prey = y;
+	if(parseInt(document.getElementById('time').innerHTML) == 0){
+		if (document.getElementById('hiscore').innerHTML<document.getElementById('score').innerHTML){
+			document.getElementById('hiscore').innerHTML = document.getElementById('score').innerHTML
+		}
+		score.innerHTML = 0;
+		document.getElementById('time').innerHTML = '10s';
 	}
 }
 </script>
