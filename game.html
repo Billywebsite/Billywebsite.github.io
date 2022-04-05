@@ -15,13 +15,14 @@
 <h1>score:</h1><h1 id = 'score' >0</h1>
 <h1 id = 'time' style = 'font-size:50px; color:darkred; position:absolute; left:500px; top:0px'>30s</h1>
 <h1 style = 'position:absolute; left:900px; top:0px'>highscore:</h1><h1 id = 'hiscore' style = 'position:absolute; left:1050px; top:0px'>0</h1>
-<img id = 'man' src = 'hand.png' style = 'position:absolute; top:800px; width:100px'>
-<img id = 'apple' src = 'apple.png' style = 'position:absolute; left:0px; top:500px; width:100px; height:100px'>
+<img id = 'man' src = 'hand.png' style = 'position:absolute; top:800px; width:150px'>
+<img id = 'apple' src = 'apple.png' style = 'position:absolute; left:0px; top:500px; width:200px; height:200px'>
 <div id = 'el'></div>
 </body>
 <script>
 var x = 0;
 var y = 0;
+var ran = 0;
 var arm = document.getElementById("arm")
 var apple = document.getElementById('apple')
 var hit = false;
@@ -55,35 +56,48 @@ function move(event){
 	if (hit == false && (x>parseInt(apple.style.left))&&(x<parseInt(apple.style.left)+apple.width)&&(y>parseInt(apple.style.top))&&(y<parseInt(apple.style.top)+apple.height)){
 		hit = true;
 		var splat = document.createElement('img')
-		splat.src = 'splat.png'
-		splat.style = 'position:absolute; width:100px; opacity:0.5;'
+		if (ran<0.5){
+			splat.src = 'splat.png';
+		}else{
+			splat.src = 'splat2.png';
+		}
+		splat.style = 'position:absolute; z-index:-1;'
+		splat.style.opacity = Math.random();
+		splat.width = Math.random()*200;
 		splat.style.left = x+'px'
 		splat.style.top = y+'px'
 		document.body.appendChild(splat)
-		xdirect = xdirect + ((x-prex)/3)
-		ydirect = ydirect + ((y-prey)/3)
+		xdirect = xdirect + ((x-prex)/6)
+		ydirect = ydirect + ((y-prey)/6)
 		hashit = true
-
+		if (ran<0.5){
+			apple.src = 'apple2.png';
+		}else{
+			apple.src = 'pear2.png';
+		}
+		apple.style.transform = 'rotate('+ran*360+'deg)'
 	}else{
 		hit = false;
 	}
 	if (parseInt(apple.style.left)>2000 || parseInt(apple.style.top)>1000 ||parseInt(apple.style.left)<-100|| parseInt(apple.style.top)<-100){
+		random= Math.random();
 		if(hashit){
 			score.innerHTML = parseInt(score.innerHTML) +1;
 			hashit = false;
 		}
-		var ran = Math.random();
-		console.log(ran);
-		if (ran >= 0.5){
+		ran = Math.random();
+		if (ran < 0.5){
+			apple.src = 'apple.png';
 			apple.style.left = (Math.random()*1700)+100+'px';
 			xdirect = Math.random() * 2;
 			ydirect = Math.random() * 2;
-			apple.style.top = (Math.random() * 500) + 'px';
-		}else if (ran < 0.5){
+			apple.style.top = (Math.random() * 900) + 'px';
+		}else if (ran >= 0.5){
+			apple.src = 'pear.png';
 			apple.style.left = (Math.random()*1700)+100+'px';
 			xdirect = Math.random() * -2;
 			ydirect = Math.random() * -2;
-			apple.style.top = (Math.random() * 500) + 'px';
+			apple.style.top = (Math.random() * 900) + 'px';
 		}
 	}
 	prex = x;
