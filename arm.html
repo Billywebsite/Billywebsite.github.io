@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html onmousemove = 'move(event)'>
+<body>
+<img id = 'hand' src = 'hand.png' style = 'position:absolute; left:500px; top:200px; width:100px; height:300px'>
+<img src = 'man.png' style = 'position:absolute; left:470px; top:180px; z-index:-1'>
+</body>
+<script>
+const hand  = document.getElementById("hand")
+const imx  = parseInt(hand.style.left)
+const imy = parseInt(hand.style.top)
+function move(event){
+	var x = event.clientX - imx - (parseInt(hand.style.width)/2)
+	var y = (event.clientY - imy - (parseInt(hand.style.height)/2)) * -1
+	var angle = Math.atan(x/y) * (180/Math.PI)
+	var newx = (parseInt(hand.height)/2) * Math.sin(angle)
+	if (y < 0){
+		angle = 180 + angle
+	} else if (x < 0){
+		angle = angle + 360
+	}
+	hand.style.transform = 'rotate(' + angle + 'deg)'
+	var radangle = angle * (Math.PI/180)
+	var newx =(parseInt(hand.style.height)/2)*Math.sin(radangle)
+	var newy =(parseInt(hand.style.height)/2)*Math.cos(radangle)
+	hand.style.left = (imx  + newx) + 'px'
+	hand.style.top = (imy  - newy) + 'px'
+}
+</script>
+</html>
