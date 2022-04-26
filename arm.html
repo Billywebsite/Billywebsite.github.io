@@ -1,27 +1,56 @@
 <!DOCTYPE html>
 <html onmousemove = 'move(event)'>
-<body>
-<img id = 'hand' src = 'hand.png' style = 'position:absolute; left:500px; top:200px; width:100px; height:300px'>
-<img src = 'man.png' style = 'position:absolute; left:470px; top:180px; z-index:-1'>
+<body style = 'background-image:url("pottery.jpg")'>
+<img id = 'hand' src = 'hand.png' onmouseenter = 'over()' style = 'position:absolute; left:500px; top:200px; width:100px; height:300px'>
+<img id = 'man' src = 'man.png' onmouseenter = 'over()' style = 'width: 220px; position:absolute; left:370px; top:220px; z-index:-1'>
+<h1 style = 'color:white' id = 'score'>0</h1>
 </body>
 <script>
+var x = 0
+var y = 0
 const hand  = document.getElementById("hand")
-const imx  = parseInt(hand.style.left)
-const imy = parseInt(hand.style.top)
+const man  = document.getElementById("man")
+var imx  = parseInt(hand.style.left)
+var imy = parseInt(hand.style.top)
+function over(){
+	document.getElementById('score').innerHTML = 0;
+}
+function update(){
+	if(x > 0){
+		hand.style.left = parseInt(hand.style.left) + 2 + 'px'
+		man.style.left = parseInt(man.style.left) + 2 + 'px'
+		imx = imx + 2
+	} else{
+		hand.style.left = parseInt(hand.style.left) - 2 + 'px'
+		man.style.left = parseInt(man.style.left) - 2 + 'px'
+		imx = imx - 2
+	}
+	if(y < 0){
+		hand.style.top = parseInt(hand.style.top) + 2 + 'px'
+		man.style.top = parseInt(man.style.top) + 2 + 'px'
+		imy = imy + 2
+	} else{
+		hand.style.top = parseInt(hand.style.top) - 2 + 'px'
+		man.style.top = parseInt(man.style.top) - 2 + 'px'
+		imy = imy - 2
+	}
+}
+setInterval(function(){document.getElementById('score').innerHTML = parseInt(document.getElementById('score').innerHTML)+1}, 100)
+setInterval(update, 10)
 function move(event){
-	var x = event.clientX - imx - (parseInt(hand.style.width)/2)
-	var y = (event.clientY - imy - (parseInt(hand.style.height)/2)) * -1
-	var angle = Math.atan(x/y) * (180/Math.PI)
-	var newx = (parseInt(hand.height)/2) * Math.sin(angle)
+	x = event.clientX - imx - (parseInt(hand.style.width)/2)
+	y = (event.clientY - imy - (parseInt(hand.style.height)/2)) * -1
+	angle = Math.atan(x/y) * (180/Math.PI)
+	newx = (parseInt(hand.height)/2) * Math.sin(angle)
 	if (y < 0){
 		angle = 180 + angle
 	} else if (x < 0){
 		angle = angle + 360
 	}
 	hand.style.transform = 'rotate(' + angle + 'deg)'
-	var radangle = angle * (Math.PI/180)
-	var newx =(parseInt(hand.style.height)/2)*Math.sin(radangle)
-	var newy =(parseInt(hand.style.height)/2)*Math.cos(radangle)
+	radangle = angle * (Math.PI/180)
+	newx =(parseInt(hand.style.height)/2)*Math.sin(radangle)
+	newy =(parseInt(hand.style.height)/2)*Math.cos(radangle)
 	hand.style.left = (imx  + newx) + 'px'
 	hand.style.top = (imy  - newy) + 'px'
 }
