@@ -6,6 +6,7 @@
 <h1 style = 'color:white' id = 'score'>0</h1>
 </body>
 <script>
+speed = 2;
 var x = 0
 var y = 0
 const hand  = document.getElementById("hand")
@@ -17,27 +18,28 @@ function over(){
 }
 function update(){
 	if(x > 0){
-		hand.style.left = parseInt(hand.style.left) + 2 + 'px'
-		man.style.left = parseInt(man.style.left) + 2 + 'px'
-		imx = imx + 2
+		hand.style.left = parseInt(hand.style.left) + speed + 'px'
+		man.style.left = parseInt(man.style.left) + speed + 'px'
+		imx = imx + speed
 	} else{
-		hand.style.left = parseInt(hand.style.left) - 2 + 'px'
-		man.style.left = parseInt(man.style.left) - 2 + 'px'
-		imx = imx - 2
+		hand.style.left = parseInt(hand.style.left) - speed + 'px'
+		man.style.left = parseInt(man.style.left) - speed + 'px'
+		imx = imx - speed
 	}
 	if(y < 0){
-		hand.style.top = parseInt(hand.style.top) + 2 + 'px'
-		man.style.top = parseInt(man.style.top) + 2 + 'px'
-		imy = imy + 2
+		hand.style.top = parseInt(hand.style.top) + speed + 'px'
+		man.style.top = parseInt(man.style.top) + speed + 'px'
+		imy = imy + speed
 	} else{
-		hand.style.top = parseInt(hand.style.top) - 2 + 'px'
-		man.style.top = parseInt(man.style.top) - 2 + 'px'
-		imy = imy - 2
+		hand.style.top = parseInt(hand.style.top) - speed + 'px'
+		man.style.top = parseInt(man.style.top) - speed + 'px'
+		imy = imy - speed
 	}
 }
-setInterval(function(){document.getElementById('score').innerHTML = parseInt(document.getElementById('score').innerHTML)+1}, 100)
 setInterval(update, 10)
 function move(event){
+	document.getElementById('score').innerHTML = parseInt(document.getElementById('score').innerHTML)+1; 
+	speed = parseInt(parseInt(document.getElementById('score').innerHTML)/10)+2
 	x = event.clientX - imx - (parseInt(hand.style.width)/2)
 	y = (event.clientY - imy - (parseInt(hand.style.height)/2)) * -1
 	angle = Math.atan(x/y) * (180/Math.PI)
