@@ -3,7 +3,8 @@
 <body style = 'background-image:url("pottery.jpg")'>
 <img id = 'hand' src = 'hand.png' onmouseenter = 'over()' style = 'position:absolute; left:500px; top:200px; width:100px; height:300px'>
 <img id = 'man' src = 'man.png' onmouseenter = 'over()' style = 'width: 220px; position:absolute; left:370px; top:220px; z-index:-1'>
-<h1 style = 'color:white' id = 'score'>0</h1>
+<h1 style = 'color:white' >score:</h1> <h1 style = 'color:white' id = 'score'>0</h1>
+<h1 style = 'color:white' >highscore:</h1> <h1 style = 'color:white' id = 'hiscore'>0</h1>
 </body>
 <script>
 speed = 2;
@@ -38,7 +39,10 @@ function update(){
 }
 setInterval(update, 10)
 function move(event){
-	document.getElementById('score').innerHTML = parseInt(document.getElementById('score').innerHTML)+1; 
+	document.getElementById('score').innerHTML = parseInt(document.getElementById('score').innerHTML)+1;
+	if (parseInt(document.getElementById('hiscore').innerHTML) < parseInt(document.getElementById('score').innerHTML)){
+		document.getElementById('hiscore').innerHTML = document.getElementById('score').innerHTML
+	}
 	speed = parseInt(parseInt(document.getElementById('score').innerHTML)/10)+2
 	x = event.clientX - imx - (parseInt(hand.style.width)/2)
 	y = (event.clientY - imy - (parseInt(hand.style.height)/2)) * -1
