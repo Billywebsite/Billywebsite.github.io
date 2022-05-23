@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html onmousemove = 'move()'>
+<body>
+<canvas id = 'canvas' width='300' height='300' style="border:1px solid #000000;"></canvas>
+</body>
+<script>
+var canvas = document.getElementById('canvas');
+var maze = canvas.getContext('2d');
+maze.lineWidth = 2;
+maze.fillStyle = 'white'
+maze.fillRect(0, 0, canvas.width, canvas.height);
+/*for (i=0; i<(canvas.height/10)+(canvas.width/10); i++){
+	if(i<canvas.width/10){
+		maze.moveTo(i*10, 0)
+		maze.lineTo(i*10, canvas.width)	
+	}else{
+		maze.moveTo(0, (i-30)*10)
+		maze.lineTo(canvas.height, (i-30)*10)
+	}
+	maze.stroke()
+}*/
+pointlist = []
+x=0;
+y=0;
+mazelist = [[x, y]];
+maze.moveTo(x, y)
+prevx = 0
+prevy = 0
+movelist = [[1, 0], [0, 1], [-1, 0], [0, -1]]
+maze.strokeStyle = 'black';
+maze.beginPath()
+for(i=0;i<((canvas.width)/10)*(canvas.height/10);i++){
+	pointlist[pointlist.length] = false;
+}
+function generate(){
+	random = Math.random();
+	prevx = x
+	prevy = y
+	x = x + movelist[parseInt(random*(movelist.length))][0]
+	y = y + movelist[parseInt(random*(movelist.length))][1]
+	if(x>canvas.width/10 || y>canvas.height/10||x<0||y<0||pointlist[(y*(canvas.width/10))+x] == true){
+		mazepoint = mazelist[parseInt(random*(mazelist.length))]
+		x = mazepoint[0]
+		y = mazepoint[1]
+		maze.moveTo(x, y)
+		generate();
+	}
+	mazelist[mazelist.length] = [x, y];
+	console.log((y*(canvas.width/10))+x)
+	pointlist[(y*(canvas.width/10))+x] = true;
+}
+function move(){
+	generate();
+	maze.beginPath()
+	maze.strokeStyle = 'white'
+	maze.moveTo(prevx*10, prevy*10)
+	maze.lineTo((prevx+Math.abs(y-prevy))*10, (prevy+Math.abs(x-prevx))*10)
+	maze.stroke();
+	maze.beginPath()
+	maze.strokeStyle = 'black'
+	maze.moveTo(x*10, y*10)
+	maze.lineTo((x+Math.abs(x-prevx))*10, (y+Math.abs(y-prevy))*10)
+	maze.moveTo((x+Math.abs(y-prevy))*10, (y+Math.abs(x-prevx))*10)	
+	maze.lineTo((x+1)*10, (y+1)*10)
+	maze.stroke()
+}
+</script>
+</html>
