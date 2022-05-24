@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html onmousemove = 'move()'>
+<html>
 <body>
 <canvas id = 'canvas' width='300' height='300' style="border:1px solid #000000;"></canvas>
 </body>
@@ -34,6 +34,7 @@ for(i=0;i<((canvas.width)/10)*(canvas.height/10);i++){
 	pointlist[pointlist.length] = false;
 }
 function generate(){
+	point = point+1
 	prevx = x
 	prevy = y
 	/*if (point < 2){
@@ -49,12 +50,7 @@ function generate(){
 	x = x + movelist[parseInt(random*(movelist.length))][0]
 	y = y + movelist[parseInt(random*(movelist.length))][1]
 	if(x>canvas.width/10 || y>canvas.height/10||x<0||y<0||pointlist[(y*(canvas.width/10))+x] == true){
-		/*point = point-1
-		if (point < 0){
-			point = mazelist.length-1
-		}*/
 		mazepoint = mazelist[parseInt(random*mazelist.length)]
-		console.log(mazelist[10])
 		x = mazepoint[0]
 		y = mazepoint[1]
 		prevx = x
@@ -67,33 +63,35 @@ function generate(){
 	
 }
 function move(){
-	point = mazelist.length-1
-	generate();
-	maze.beginPath()
-	maze.strokeStyle = 'white'
-	if ((x-prevx)==-1 || (y-prevy)==-1){
-		maze.moveTo((x-(x-prevx))*10, ((y-(y-prevy))*10))
-		maze.lineTo(((x-(x-prevx))+Math.abs(y-prevy))*10, ((y-(y-prevy))+Math.abs(x-prevx))*10)	
-	}else{
+	if(point<9000){
+		point = 0
+		generate();
+		maze.beginPath()
+		maze.strokeStyle = 'white'
+		if ((x-prevx)==-1 || (y-prevy)==-1){
+			maze.moveTo((x-(x-prevx))*10, ((y-(y-prevy))*10))
+			maze.lineTo(((x-(x-prevx))+Math.abs(y-prevy))*10, ((y-(y-prevy))+Math.abs(x-prevx))*10)	
+		}else{
+			maze.moveTo(x*10, y*10)
+			maze.lineTo((x+Math.abs(y-prevy))*10, (y+Math.abs(x-prevx))*10)
+		}
+		maze.stroke();
+		maze.beginPath()
+		maze.strokeStyle = 'black'
 		maze.moveTo(x*10, y*10)
-		maze.lineTo((x+Math.abs(y-prevy))*10, (y+Math.abs(x-prevx))*10)
+		maze.lineTo((x+Math.abs(x-prevx))*10, (y+Math.abs(y-prevy))*10)
+		if ((x-prevx)==-1 || (y-prevy)==-1){
+			maze.moveTo(((x-(x-prevx))+(x-prevx))*10, ((y-(y-prevy))+(y-prevy))*10)
+			maze.lineTo(((x-(x-prevx))+(1*neg(x-prevx)))*10, ((y-(y-prevy))+(1*neg(y-prevy)))*10)
+		}else{
+			maze.moveTo((x+(x-prevx))*10, (y+(y-prevy))*10)
+			maze.lineTo((x+(1*neg(x-prevx)))*10, (y+(1*neg(y-prevy)))*10)
+		}
+
+		maze.moveTo((x+Math.abs(y-prevy))*10, (y+Math.abs(x-prevx))*10)	
+		maze.lineTo((x+(1))*10, (y+(1))*10)
+		maze.stroke()
 	}
-	maze.stroke();
-	maze.beginPath()
-	maze.strokeStyle = 'black'
-	maze.moveTo(x*10, y*10)
-	maze.lineTo((x+Math.abs(x-prevx))*10, (y+Math.abs(y-prevy))*10)
-	if ((x-prevx)==-1 || (y-prevy)==-1){
-		maze.moveTo(((x-(x-prevx))+(x-prevx))*10, ((y-(y-prevy))+(y-prevy))*10)
-		maze.lineTo(((x-(x-prevx))+(1*neg(x-prevx)))*10, ((y-(y-prevy))+(1*neg(y-prevy)))*10)
-	}else{
-		maze.moveTo((x+(x-prevx))*10, (y+(y-prevy))*10)
-		maze.lineTo((x+(1*neg(x-prevx)))*10, (y+(1*neg(y-prevy)))*10)
-	}
-	
-	maze.moveTo((x+Math.abs(y-prevy))*10, (y+Math.abs(x-prevx))*10)	
-	maze.lineTo((x+(1))*10, (y+(1))*10)
-	maze.stroke()
 }
 function neg(val){
 	if (val>-1){
@@ -102,6 +100,6 @@ function neg(val){
 		return -1;
 	}
 }
-
+setInterval('move', 10)
 </script>
 </html>
